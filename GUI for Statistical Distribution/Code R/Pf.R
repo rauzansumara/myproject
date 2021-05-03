@@ -1,0 +1,30 @@
+Pf <- function(h,...){
+  pel <- gwindow("Peluang Fisher")
+  Big <- ggroup(container = pel,horizontal = F)
+  g1 <- gframe("Nilai:",container = Big,expand=F)
+  g2 <- gframe("Derajat Bebas 1:",container = Big,expand=F)
+  g3 <- gframe("Derajat Bebas 2:",container = Big,expand=F)
+  nilai <- gedit(container = g1)
+  df1 <- gedit(container = g2,coerce.with = as.numeric)
+  df2 <- gedit(container = g3,coerce.with = as.numeric)
+  avail <- c(LowerTail=1,UpperTail=2)
+  poin <- gradio(names(avail),horizontal = F,container = Big)
+  Big1 <- ggroup(container = Big)
+  canc=gbutton("Cancel",cont=Big1,expand=T)
+  addHandlerChanged(canc, handler= function(h,...){
+    visible(pel)= FALSE
+    focus (main)
+  })
+  ok=gbutton("OK",cont=Big1,expand=T)
+  addHandlerChanged(ok,handler=function(h,...){
+    x <- get(svalue(nilai), mode = "numeric")
+    if(avail[svalue(poin)]==1) { pelu <- pf(svalue(x),svalue(df1),svalue(df2))}
+    if(avail[svalue(poin)]==2) { pelu <- pf(svalue(x),svalue(df1),svalue(df2),lower.tail = F)}
+    insert(Output,"")
+    insert(Output,capture.output(cbind(X=x,Peluang=pelu)))
+    
+    visible(pel)= FALSE
+    focus(main)
+  })
+}
+
