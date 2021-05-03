@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QR-code</string>
+    <string name="title_activity_scanner">Scanner</string>
+    <string name="title_activity_main">Main Menu</string>
+    <string name="title_activity_scanner_result">Scanner Result</string>
+    <string name="title_activity_assets_list_activity">Assets List</string>
+    <string name="add">Add Data</string>
+</resources>
